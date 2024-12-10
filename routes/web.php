@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Auth\AuthDriverComponent;
+use App\Livewire\Dashboard;
+use App\Livewire\Home;
+use App\Livewire\Salary\SalaryManager;
 
-Route::get('/', function () {
-    return view('welcome')->name('welcome');
-});
+Route::get('/', Home::class)->name('home');
 
+Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-
-Route::get('login', AuthDriverComponent::class);
+Route::get('/salaries', SalaryManager::class)->name('salaries');
