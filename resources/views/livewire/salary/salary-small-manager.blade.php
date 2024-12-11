@@ -11,6 +11,14 @@
         </div>
         <div class="space-y-2">
             @foreach ( $salaries as $salary )
+
+
+
+            <div class="w-1/3">{{$salary->event_date->format(config('app.date_format'))}}</div>
+            <div class="w-1/3">{{$salary->sum}}</div>
+            <div class="w-1/3">{{$salary->comment}}</div>
+
+
             <div wire:key="{{ $salary->id }}" class="mr-2 text-xs text-gray-600 leading-relaxed">
                 {{__('Created')}} {{$salary->created_at}}
                 {{__('Updated')}} {{$salary->updated_at}}
