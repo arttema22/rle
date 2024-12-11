@@ -15,7 +15,7 @@ class SalarySmallManager extends Component
     public function render()
     {
         // sleep(5);
-        $salaries = Salary::with(['owner'])->with(['driver'])->simplePaginate(3, pageName: 'salaries');
+        $salaries = Salary::with(['driver'])->simplePaginate(3, pageName: 'salaries');
         return view('livewire.salary.salary-small-manager', ['salaries' => $salaries]);
     }
 
