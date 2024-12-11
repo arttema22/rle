@@ -37,10 +37,10 @@ class Salary extends Model
      * Получить данные о создателе записи.
      * @return void
      */
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'owner_id', 'id');
-    }
+    // public function owner()
+    // {
+    //     return $this->belongsTo(User::class, 'owner_id', 'id');
+    // }
 
     /**
      * driver

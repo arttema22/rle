@@ -4,17 +4,23 @@ namespace App\Livewire\Salary;
 
 use App\Models\Salary;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
+#[Lazy]
 class SalarySmallManager extends Component
 {
+    use WithPagination, WithoutUrlPagination;
+
     public $salary_id, $event_date, $owner, $driver_id, $sum, $comment;
     public $isOpenForm = false, $confirmingDeletion = false;
     public $createOrUpdate;
 
     public function render()
     {
-        // sleep(5);
+        sleep(3);
         $salaries = Salary::with(['driver'])->simplePaginate(3, pageName: 'salaries');
         return view('livewire.salary.salary-small-manager', ['salaries' => $salaries]);
     }
@@ -27,6 +33,19 @@ class SalarySmallManager extends Component
         $this->toggle();
     }
 
+    public function edit($id)
+    {
+        $this->createOrUpdate = 1;
+
+        $salary = Salary::findOrFail($id);
+
+        $this->salary_id = $salary->id;
+        $this->event_date = $salary->event_date->format('Y-m-d');
+        $this->sum = $salary->sum;
+        $this->comment = $salary->comment;
+        $this->toggle();
+    }
+
     public function store()
     {
         $this->validate([
@@ -35,12 +54,11 @@ class SalarySmallManager extends Component
             'comment' => 'nullable|string',
         ]);
 
-        dd(Auth::user());
         Salary::updateOrCreate(
             ['id' => $this->salary_id],
             [
                 'event_date' => $this->event_date,
-                'owner' => Auth::user()->name,
+                'owner' => Auth::user()->last_name,
                 'driver_id' => Auth::user()->id,
                 'sum' => $this->sum,
                 'comment' => $this->comment,
@@ -48,6 +66,24 @@ class SalarySmallManager extends Component
         );
         $this->toggle();
         $this->resetInputFields();
+        $this->dispatch('salaryUpdate');
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->salary_id = $id;
+        $this->confirmingDeletion = true;
+    }
+
+    /**
+     * delete
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        Salary::find($this->salary_id)->delete();
+        $this->confirmingDeletion = false;
         $this->dispatch('salaryUpdate');
     }
 
