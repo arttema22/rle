@@ -1,5 +1,8 @@
 <div>
-    <div>header DASHBOARD</div>
+    <x-header.header>
+        {{__('Dashboard')}}
+    </x-header.header>
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="md:col-span-2">
             @livewire('Salary.SalarySmallManager')

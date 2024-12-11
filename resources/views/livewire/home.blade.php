@@ -1,3 +1,5 @@
 <div>
-    <h1>HOME</h1>
+    <x-header.header>
+        {{__('Home')}}
+    </x-header.header>
 </div>
