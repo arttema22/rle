@@ -45,7 +45,17 @@
         </div>
 
         <div class='flex max-lg:ml-auto space-x-4'>
-            @livewire('Auth.AuthDriver')
+
+            <span class="inline-flex rounded-md">
+                <button type="button"
+                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                    {{Auth::user()->last_name}}
+                </button>
+                <button wire:click="logout"
+                    class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                    {{__('Log Out')}}
+                </button>
+            </span>
 
             <button id="toggleOpen" class='lg:hidden'>
                 <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

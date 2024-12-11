@@ -12,8 +12,13 @@
 
 <body>
     <main class="m-2 xl:mx-auto max-w-6xl">
+        @guest
+        @livewire('Nav.GuestNavBar')
+        @endguest
 
-        @livewire('NavBar')
+        @auth
+        @livewire('Nav.AuthNavBar')
+        @endauth
 
         {{ $slot }}
     </main>
