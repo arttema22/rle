@@ -4,6 +4,8 @@
         <div class="md:col-span-2">
             @livewire('Salary.SalarySmallManager')
         </div>
-        <h1>DASHBOARD</h1>
+        <div>
+            @livewire('Salary.SalaryCard')
+        </div>
     </div>
 </div>
