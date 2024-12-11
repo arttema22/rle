@@ -18,7 +18,7 @@ class SalaryManager extends Component
 
     public function render()
     {
-        sleep(3);
+        // sleep(3);
         return view('livewire.salary.salary-manager');
     }
 
