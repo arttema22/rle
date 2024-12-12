@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Salary;
 
+use App\Models\Salary;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
 use Livewire\WithoutUrlPagination;
+use Illuminate\Support\Facades\Auth;
 
 #[Lazy]
 class SalaryManager extends Component
@@ -19,7 +21,9 @@ class SalaryManager extends Component
     public function render()
     {
         // sleep(3);
-        return view('livewire.salary.salary-manager');
+        // $salaries = Salary::where('driver_id', Auth::user()->id)->orderByDesc('event_date')->simplePaginate(5, pageName: 'salaries');
+        $salaries = Salary::where('driver_id', Auth::user()->id)->orderByDesc('event_date')->get();
+        return view('livewire.salary.salary-manager', ['salaries' => $salaries]);
     }
 
     public function placeholder()

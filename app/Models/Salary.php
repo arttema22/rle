@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Support\Carbon;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +15,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Salary extends Model
 {
     /** @use HasFactory<\Database\Factories\SalaryFactory> */
-    use HasFactory, SoftDeletes, MassPrunable;
+    use HasFactory, SoftDeletes, MassPrunable, LogsActivity;
+
+    //protected static $logAttributes = ['attribute1', 'attribute2'];
+
+    //protected static $logName = 'your_model';
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['event_date', 'sum', 'comment']);
+        // Chain fluent methods for configuration options
+    }
 
     protected $fillable = [
         'id',
