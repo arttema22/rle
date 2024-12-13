@@ -10,7 +10,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Models\Activity;
 
 class Salary extends Model
 {
@@ -24,7 +26,10 @@ class Salary extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['event_date', 'sum', 'comment']);
+            ->logOnly(['event_date', 'sum', 'comment'])
+            ->useLogName('salary')
+            //->logOnlyDirty()
+        ;
         // Chain fluent methods for configuration options
     }
 
@@ -43,6 +48,11 @@ class Salary extends Model
         return [
             'event_date' => 'date',
         ];
+    }
+
+    public function log(): HasMany
+    {
+        return $this->hasMany(Activity::class, 'subject_id');
     }
 
     /**

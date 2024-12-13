@@ -27,6 +27,26 @@
                         {{-- {{__('Updated')}} {{$salary->updated_at}} --}}
                         {{__('Owner')}} {{$salary->owner}}
                         {{-- {{__('Driver')}} {{$salary->driver->last_name}} --}}
+                        @foreach ( $salary->log->where('log_name', 'salary') as $log )
+                        <div>{{$log->description}}</div>
+                        <div>{{$log->event}}</div>
+                        @php
+                        $data = json_decode($log->properties);
+                        @endphp
+                        <div>{{$data->old->event_date}}</div>
+                        <div>{{$data->old->sum}}</div>
+                        <div>{{$data->old->comment}}</div>
+
+                        <div>{{$data->attributes->event_date}}</div>
+                        <div>{{$data->attributes->sum}}</div>
+                        <div>{{$data->attributes->comment}}</div>
+
+                        <div>{{$log->properties}}</div>
+
+                        <div>{{$log->subject_id}}</div>
+                        <div>{{$log->changes}}</div>
+                        {{$log}}
+                        @endforeach
                     </div>
                     <div class="flex">
                         <button wire:click="edit({{ $salary->id }})">edit</button>

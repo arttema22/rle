@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
 use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 #[Lazy]
 class SalaryManager extends Component
@@ -22,7 +23,10 @@ class SalaryManager extends Component
     {
         // sleep(3);
         // $salaries = Salary::where('driver_id', Auth::user()->id)->orderByDesc('event_date')->simplePaginate(5, pageName: 'salaries');
-        $salaries = Salary::where('driver_id', Auth::user()->id)->orderByDesc('event_date')->get();
+        $salaries = Salary::where('driver_id', Auth::user()->id)
+            ->with('driver')
+            ->with('log')->orderByDesc('event_date')->get();
+
         return view('livewire.salary.salary-manager', ['salaries' => $salaries]);
     }
 

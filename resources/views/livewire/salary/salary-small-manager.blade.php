@@ -24,7 +24,7 @@
                         {{__('Created')}} {{$salary->created_at}}
                         {{__('Updated')}} {{$salary->updated_at}}
                         {{__('Owner')}} {{$salary->owner}}
-                        {{__('Driver')}} {{$salary->driver->name}}
+                        {{__('Driver')}} {{$salary->driver->last_name}}
                     </div>
                     <div class="flex">
                         <button wire:click="edit({{ $salary->id }})">edit</button>
