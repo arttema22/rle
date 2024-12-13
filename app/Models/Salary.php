@@ -52,7 +52,8 @@ class Salary extends Model
 
     public function log(): HasMany
     {
-        return $this->hasMany(Activity::class, 'subject_id');
+        return $this->hasMany(Activity::class, 'subject_id')
+            ->where('log_name', 'salary');
     }
 
     /**

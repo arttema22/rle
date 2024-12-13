@@ -21,36 +21,54 @@
                     <div class="w-1/3">{{$salary->sum}}</div>
                     <div class="w-1/3">{{$salary->comment}}</div>
                 </button>
-                <div x-show="open" class="flex justify-between items-center rounded-md">
+                <div x-show="open" class="flex justify-between items-center border-t">
                     <div class="mr-2 text-xs text-gray-600 leading-relaxed">
-                        {{__('Created')}} {{$salary->created_at}}
-                        {{-- {{__('Updated')}} {{$salary->updated_at}} --}}
-                        {{__('Owner')}} {{$salary->owner}}
-                        {{-- {{__('Driver')}} {{$salary->driver->last_name}} --}}
-                        @foreach ( $salary->log->where('log_name', 'salary') as $log )
-                        <div>{{$log->description}}</div>
-                        <div>{{$log->event}}</div>
-                        @php
-                        $data = json_decode($log->properties);
-                        @endphp
-                        <div>{{$data->old->event_date}}</div>
-                        <div>{{$data->old->sum}}</div>
-                        <div>{{$data->old->comment}}</div>
 
-                        <div>{{$data->attributes->event_date}}</div>
-                        <div>{{$data->attributes->sum}}</div>
-                        <div>{{$data->attributes->comment}}</div>
 
-                        <div>{{$log->properties}}</div>
-
-                        <div>{{$log->subject_id}}</div>
-                        <div>{{$log->changes}}</div>
-                        {{$log}}
-                        @endforeach
-                    </div>
-                    <div class="flex">
-                        <button wire:click="edit({{ $salary->id }})">edit</button>
-                        <button wire:click="confirmDelete({{ $salary->id }})">delete</button>
+                        <!-- Timeline -->
+                        <div>
+                            @foreach ( $salary->log as $log )
+                            @if ($log)
+                            <!-- Item -->
+                            <div class="flex gap-x-3">
+                                <!-- Left Content -->
+                                <div class="w-16 text-end">
+                                    <span class="text-xs text-gray-500">
+                                        {{$log->created_at->format(config('app.date_full_format'))}}
+                                    </span>
+                                </div>
+                                <!-- End Left Content -->
+                                <!-- Icon -->
+                                <div
+                                    class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200">
+                                    <div class="relative z-10 size-7 flex justify-center items-center">
+                                        <div class="size-2 rounded-full bg-gray-400"></div>
+                                    </div>
+                                </div>
+                                <!-- End Icon -->
+                                <!-- Right Content -->
+                                <div class="grow pt-0.5 pb-8">
+                                    <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+                                        {{$log->event}}
+                                    </h3>
+                                    <div>
+                                        {{$log->properties->attributes->sum}}
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        {{-- {{$log->properties}} --}}
+                                    </p>
+                                </div>
+                                <!-- End Right Content -->
+                            </div>
+                            <!-- End Item -->
+                            @endif
+                            @endforeach
+                        </div>
+                        <!-- End Timeline -->
+                        <div class="flex gap-2">
+                            <button wire:click="edit({{ $salary->id }})">edit</button>
+                            <button wire:click="confirmDelete({{ $salary->id }})">delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
