@@ -2,37 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Carbon;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\MassPrunable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\Models\Activity;
 
 class Salary extends Model
 {
-    /** @use HasFactory<\Database\Factories\SalaryFactory> */
-    use HasFactory, SoftDeletes, MassPrunable, LogsActivity;
+    use HasFactory, MassPrunable, LogsActivity;
 
-    //protected static $logAttributes = ['attribute1', 'attribute2'];
-
-    //protected static $logName = 'your_model';
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnly(['event_date', 'sum', 'comment'])
-            ->useLogName('salary')
-            //->logOnlyDirty()
-        ;
-        // Chain fluent methods for configuration options
-    }
-
+    /**
+     * fillable
+     *
+     * @var array
+     */
     protected $fillable = [
         'id',
         'event_date',
@@ -43,6 +30,11 @@ class Salary extends Model
         'profit_id',
     ];
 
+    /**
+     * casts
+     *
+     * @return array
+     */
     protected function casts(): array
     {
         return [
@@ -50,21 +42,28 @@ class Salary extends Model
         ];
     }
 
+    /**
+     * getActivitylogOptions
+     *
+     * @return LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['event_date', 'sum', 'comment'])
+            ->useLogName('salary');
+    }
+
+    /**
+     * log
+     *
+     * @return HasMany
+     */
     public function log(): HasMany
     {
         return $this->hasMany(Activity::class, 'subject_id')
             ->where('log_name', 'salary');
     }
-
-    /**
-     * owner
-     * Получить данные о создателе записи.
-     * @return void
-     */
-    // public function owner()
-    // {
-    //     return $this->belongsTo(User::class, 'owner_id', 'id');
-    // }
 
     /**
      * driver
@@ -75,32 +74,6 @@ class Salary extends Model
     {
         return $this->belongsTo(User::class, 'driver_id', 'id');
     }
-
-    /**
-     * createdAt
-     *
-     * @return Attribute
-     */
-    // protected function createdAt(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn(string $value) => Carbon::parse($value)
-    //             ->format(config('app.date_full_format')),
-    //     );
-    // }
-
-    /**
-     * updatedAt
-     *
-     * @return Attribute
-     */
-    // protected function updatedAt(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn(string $value) => Carbon::parse($value)
-    //             ->format(config('app.date_full_format')),
-    //     );
-    // }
 
     /**
      * prunable

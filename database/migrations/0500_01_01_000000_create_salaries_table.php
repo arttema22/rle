@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('comment')->nullable();
             $table->BigInteger('profit_id')->unsigned()->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

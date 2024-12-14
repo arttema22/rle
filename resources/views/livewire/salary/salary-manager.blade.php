@@ -82,31 +82,19 @@
                                     <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
                                         {{__('ui.updated')}}
                                     </h3>
-                                    <div class="flex gap-1">
-                                        <div class="text-red-800 p-1 border border-red-800 rounded-md">
+                                    <div class="flex flex-wrap justify-start items-center gap-1">
+                                        <span class="bg-red-50 px-1 rounded-md">
                                             {{__('ui.old')}}:
-                                            <span class="bg-red-100 p-1 m-1 rounded-md">
-                                                {{date('d.m.Y', strtotime(json_decode($log)->properties->old->event_date))}}
-                                            </span>
-                                            <span class="bg-red-100 p-1 m-1 rounded-md">
-                                                {{json_decode($log)->properties->old->sum}}
-                                            </span>
-                                            <span class="bg-red-100 p-1 m-1 rounded-md">
-                                                {{json_decode($log)->properties->old->comment}}
-                                            </span>
-                                        </div>
-                                        <div class="text-green-800 p-1 border border-green-800 rounded-md">
+                                            {{date('d.m.Y', strtotime(json_decode($log)->properties->old->event_date))}}
+                                            {{json_decode($log)->properties->old->sum}}
+                                            {{json_decode($log)->properties->old->comment}}
+                                        </span>
+                                        <span class="bg-green-50 px-1 rounded-md">
                                             {{__('ui.new')}}:
-                                            <span class="bg-green-100 p-1 m-1 rounded-md">
-                                                {{date('d.m.Y', strtotime(json_decode($log)->properties->attributes->event_date))}}
-                                            </span>
-                                            <span class="bg-green-100 p-1 m-1 rounded-md">
-                                                {{json_decode($log)->properties->attributes->sum}}
-                                            </span>
-                                            <span class="bg-green-100 p-1 m-1 rounded-md">
-                                                {{json_decode($log)->properties->attributes->comment}}
-                                            </span>
-                                        </div>
+                                            {{date('d.m.Y', strtotime(json_decode($log)->properties->attributes->event_date))}}
+                                            {{json_decode($log)->properties->attributes->sum}}
+                                            {{json_decode($log)->properties->attributes->comment}}
+                                        </span>
                                     </div>
                                     @endif
                                 </div>
@@ -136,30 +124,30 @@
                     <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                         <div class="text-center sm:text-left">
                             <h3 class="text-base font-semibold text-gray-900" id="modal-title">
-                                {{($createOrUpdate) ? __('Edit salary') : __('Create new salary')}}
+                                {{($createOrUpdate) ? __('salaries.edit_salary') : __('salaries.new_salary')}}
                             </h3>
                             <div class="mt-2">
                                 <div class="mt-4">
-                                    <label class="text-gray-800 text-sm mb-2 block">{{__('Date')}}</label>
+                                    <label class="text-gray-800 text-sm mb-2 block">{{__('ui.date')}}</label>
                                     <input wire:model="event_date" name="event_date" type="date" required autofocus
                                         autocomplete="event_date"
                                         class="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
-                                        placeholder="{{__('Enter date')}}" />
+                                        placeholder="{{__('ui.enter_date')}}" />
                                     <div class="text-red-600">@error('event_date') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="mt-4">
-                                    <label class="text-gray-800 text-sm mb-2 block">{{__('Sum')}}</label>
+                                    <label class="text-gray-800 text-sm mb-2 block">{{__('ui.sum')}}</label>
                                     <input wire:model="sum" name="sum" type="number" min="10" max="1000000" step=".01"
                                         required autocomplete="sum"
                                         class="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
-                                        placeholder="{{__('Enter sum')}}" />
+                                        placeholder="{{__('ui.enter_sum')}}" />
                                     <div class="text-red-600">@error('sum') {{ $message }} @enderror</div>
                                 </div>
                                 <div class="mt-4">
-                                    <label class="text-gray-800 text-sm mb-2 block">{{__('Comment')}}</label>
+                                    <label class="text-gray-800 text-sm mb-2 block">{{__('ui.comment')}}</label>
                                     <input wire:model="comment" name="comment" type="text" autocomplete="comment"
                                         class="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
-                                        placeholder="{{__('Enter comment')}}" />
+                                        placeholder="{{__('ui.enter_comment')}}" />
                                     <div class="text-red-600">@error('comment') {{ $message }} @enderror</div>
                                 </div>
                             </div>
@@ -167,9 +155,13 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button wire:click="store" type="button"
-                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">{{__('Save')}}</button>
+                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+                            {{__('ui.save')}}
+                        </button>
                         <button wire:click="toggle" type="button"
-                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{__('Cancel')}}</button>
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            {{__('ui.cancel')}}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -188,20 +180,24 @@
                     <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                         <div class="text-center sm:text-left">
                             <h3 class="text-base font-semibold text-gray-900" id="modal-title">
-                                {{__('Delete')}}
+                                {{__('ui.delete')}}
                             </h3>
                             <div class="mt-2">
                                 <div class="mt-4">
-                                    {{__('Are you sure you want to delete this entry?')}}
+                                    {{__('ui.want_to_delete')}}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                         <button wire:click="delete" wire:loading.attr="disabled" type="button"
-                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">{{__('Save')}}</button>
+                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+                            {{__('ui.save')}}
+                        </button>
                         <button wire:click="$toggle('confirmingDeletion')" wire:loading.attr="disabled" type="button"
-                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{__('Cancel')}}</button>
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                            {{__('ui.cancel')}}
+                        </button>
                     </div>
                 </div>
             </div>
