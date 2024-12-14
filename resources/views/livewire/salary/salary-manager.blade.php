@@ -1,14 +1,14 @@
 <div>
     <x-header.header>
-        <h1>{{__('Salaries')}}</h1>
-        <button wire:click="create">New</button>
+        <h1>{{__('salaries.salaries')}}</h1>
+        <button wire:click="create">{{__('ui.create')}}</button>
     </x-header.header>
 
     <div class="relative mx-auto  bg-gray-100 overflow-x-auto border sm:rounded-lg p-4">
         <div class="w-full flex px-6 py-1">
-            <div class="w-1/4">{{__('Date')}}</div>
-            <div class="w-1/4">{{__('Sum')}}</div>
-            <div class="w-1/4">{{__('Comment')}}</div>
+            <div class="w-1/4">{{__('ui.date')}}</div>
+            <div class="w-1/4">{{__('ui.sum')}}</div>
+            <div class="w-1/4">{{__('ui.comment')}}</div>
             <div class="w-1/4"></div>
         </div>
         <div class="space-y-2">
@@ -21,7 +21,7 @@
                     <div class="w-1/4">{{$salary->sum}}</div>
                     <div class="w-1/4">{{$salary->comment}}</div>
                     <div class="w-1/4 flex justify-end gap-2">
-                        <button wire:click="edit({{ $salary->id }})" title="{{__('Edit')}}">
+                        <button wire:click="edit({{ $salary->id }})" title="{{__('ui.edit')}}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700"
                                 viewBox="0 0 348.882 348.882">
                                 <path
@@ -32,7 +32,7 @@
                                     data-original="#000000" />
                             </svg>
                         </button>
-                        <button wire:click="confirmDelete({{ $salary->id }})" title={{__('Delete')}}>
+                        <button wire:click="confirmDelete({{ $salary->id }})" title={{__('ui.delete')}}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700"
                                 viewBox="0 0 24 24">
                                 <path
@@ -72,19 +72,19 @@
                                 <div class="grow pt-0.5 pb-2">
                                     @if ($log->event == 'created')
                                     <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
-                                        {{__('Created')}}
+                                        {{__('ui.created')}}
                                     </h3>
                                     <p class="mt-1 text-sm text-gray-600">
-                                        {{__('Owner')}} {{$salary->owner}}
+                                        {{__('ui.owner')}}: {{$salary->owner}}
                                     </p>
                                     @endif
                                     @if ($log->event == 'updated')
                                     <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
-                                        {{__('Updated')}}
+                                        {{__('ui.updated')}}
                                     </h3>
                                     <div class="flex gap-1">
                                         <div class="text-red-800 p-1 border border-red-800 rounded-md">
-                                            {{__('Old')}}:
+                                            {{__('ui.old')}}:
                                             <span class="bg-red-100 p-1 m-1 rounded-md">
                                                 {{date('d.m.Y', strtotime(json_decode($log)->properties->old->event_date))}}
                                             </span>
@@ -96,7 +96,7 @@
                                             </span>
                                         </div>
                                         <div class="text-green-800 p-1 border border-green-800 rounded-md">
-                                            {{__('New')}}:
+                                            {{__('ui.new')}}:
                                             <span class="bg-green-100 p-1 m-1 rounded-md">
                                                 {{date('d.m.Y', strtotime(json_decode($log)->properties->attributes->event_date))}}
                                             </span>
