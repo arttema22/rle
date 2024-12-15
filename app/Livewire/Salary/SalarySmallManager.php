@@ -30,7 +30,7 @@ class SalarySmallManager extends Component
             ->with('driver')
             ->with('log')
             ->orderByDesc('event_date')
-            ->paginate(10, pageName: 'salaries');
+            ->paginate(3, pageName: 'salaries');
 
         return view('livewire.salary.salary-small-manager', ['salaries' => $salaries]);
     }

@@ -13,7 +13,9 @@ class SalaryCard extends Component
 
     public function render()
     {
-        $Salaries = Salary::where('driver_id', Auth::user()->id)->get();
+        $Salaries = Salary::where('driver_id', Auth::user()->id)
+            ->where('profit_id', 0)
+            ->get();
         $SalariesCount = $Salaries->count();
         $SalariesSum = round($Salaries->sum('sum'), 2);
 

@@ -12,6 +12,7 @@ return [
     'date' => 'Date',
     'enter_date' => 'Enter date',
     'sum' => 'Sum',
+    'count' => 'Count',
     'enter_sum' => 'Enter sum',
     'comment' => 'Comment',
     'enter_comment' => 'Enter comment',
