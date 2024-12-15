@@ -4,7 +4,6 @@
         <x-buttons.btn-new wire:click="create" />
     </div>
     <x-blocks.wrap>
-        @if ($salaries->isNotEmpty())
         <x-blocks.header>
             <x-slot:title>
             </x-slot:title>
@@ -14,11 +13,8 @@
             <div class="w-1/4"></div>
         </x-blocks.header>
         <x-blocks.content class="h-[190px]">
-            @each('components.items.salary', $salaries, 'salary')
+            @each('components.items.salary', $salaries, 'salary', 'components.items.empty')
         </x-blocks.content>
-        @else
-        <x-blocks.no-entries />
-        @endif
     </x-blocks.wrap>
     <div class="px-4 py-4 bg-white">
         {{$salaries->onEachSide(1)->links()}}

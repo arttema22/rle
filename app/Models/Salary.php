@@ -82,6 +82,7 @@ class Salary extends Model
      */
     public function prunable(): Builder
     {
-        return static::where('deleted_at', '<=', now()->subDay());
+        return static::where('profit_id', '!=', 0)
+        ->where('created_at', '<', now()->subDay(90));
     }
 }
