@@ -1,9 +1,10 @@
 <?php
 
-use App\Livewire\Auth\LoginDriver;
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Dashboard;
 use App\Livewire\Home;
+use App\Livewire\Dashboard;
+use App\Livewire\Auth\LoginDriver;
+use App\Livewire\Btrip\BtripManager;
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Salary\SalaryManager;
 
 Route::get('/', Home::class)->name('home');
@@ -14,5 +15,7 @@ Route::middleware(['auth'])->group(
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
         Route::get('salaries', SalaryManager::class)->name('salaries');
+
+        Route::get('btrips', BtripManager::class)->name('btrips');
     }
 );

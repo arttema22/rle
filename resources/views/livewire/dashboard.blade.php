@@ -10,5 +10,13 @@
         <div>
             @livewire('Salary.SalaryCard')
         </div>
+
+        <div class="md:col-span-2">
+            {{-- @livewire('Salary.SalarySmallManager') --}}
+        </div>
+        <div>
+            @livewire('Btrip.BtripCard')
+        </div>
+
     </div>
 </div>
