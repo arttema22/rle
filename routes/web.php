@@ -13,6 +13,6 @@ Route::middleware(['auth'])->group(
     function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-        Route::get('/salaries', SalaryManager::class)->name('salaries');
+        Route::get('salaries', SalaryManager::class)->name('salaries');
     }
 );
