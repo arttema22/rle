@@ -16,8 +16,13 @@ return [
     'comment' => 'Комментарий',
     'enter_comment' => 'Введите комментарий',
 
+    // titles
+    'active' => 'Активные',
+    'archive' => 'Архив',
+
     // messages
     'want_to_delete' => 'Вы уверены, что хотите удалить эту запись?',
+    'no_entries' => 'Нет записей',
 
     'created' => 'Создание',
     'updated' => 'Обновление',

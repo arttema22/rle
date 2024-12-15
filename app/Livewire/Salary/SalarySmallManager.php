@@ -18,9 +18,13 @@ class SalarySmallManager extends Component
     public $isOpenForm = false, $confirmingDeletion = false;
     public $createOrUpdate;
 
+    /**
+     * render
+     *
+     * @return void
+     */
     public function render()
     {
-        //  sleep(3);
         $salaries = Salary::where('driver_id', Auth::user()->id)
             ->with('driver')->orderByDesc('event_date')->simplePaginate(3, pageName: 'salaries');
         return view('livewire.salary.salary-small-manager', ['salaries' => $salaries]);

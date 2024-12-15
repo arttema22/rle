@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
 use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Activitylog\Models\Activity;
 
 #[Lazy]
 class SalaryManager extends Component
@@ -19,30 +18,62 @@ class SalaryManager extends Component
     public $isOpenForm = false, $confirmingDeletion = false;
     public $createOrUpdate;
 
+    /**
+     * render
+     *
+     * @return void
+     */
     public function render()
     {
-        // sleep(3);
-        // $salaries = Salary::where('driver_id', Auth::user()->id)->orderByDesc('event_date')->simplePaginate(5, pageName: 'salaries');
         $salaries = Salary::where('driver_id', Auth::user()->id)
+            ->where('profit_id', 0)
             ->with('driver')
-            ->with('log')->orderByDesc('event_date')->get();
+            ->with('log')
+            ->orderByDesc('event_date')
+            ->paginate(10, pageName: 'salaries');
 
-        return view('livewire.salary.salary-manager', ['salaries' => $salaries]);
+        $archive = Salary::where('driver_id', Auth::user()->id)
+            ->where('profit_id', '!=', 0)
+            ->with('log')
+            ->orderByDesc('event_date')
+            ->paginate(10, pageName: 'archive');
+
+        return view('livewire.salary.salary-manager', [
+            'salaries' => $salaries,
+            'archive' => $archive
+        ]);
     }
 
+    /**
+     * placeholder
+     *
+     * @return void
+     */
     public function placeholder()
     {
         return view('livewire.salary.spinner');
     }
 
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create()
     {
+
         $this->resetInputFields();
         $this->event_date = date('Y-m-d');
         $this->createOrUpdate = 0;
         $this->toggle();
     }
 
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function edit($id)
     {
         $this->createOrUpdate = 1;
@@ -56,6 +87,11 @@ class SalaryManager extends Component
         $this->toggle();
     }
 
+    /**
+     * store
+     *
+     * @return void
+     */
     public function store()
     {
         $this->validate([
@@ -79,6 +115,12 @@ class SalaryManager extends Component
         $this->dispatch('salaryUpdate');
     }
 
+    /**
+     * confirmDelete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function confirmDelete($id)
     {
         $this->salary_id = $id;
@@ -97,11 +139,21 @@ class SalaryManager extends Component
         $this->dispatch('salaryUpdate');
     }
 
+    /**
+     * toggle
+     *
+     * @return void
+     */
     public function toggle()
     {
         $this->isOpenForm = !$this->isOpenForm;
     }
 
+    /**
+     * resetInputFields
+     *
+     * @return void
+     */
     private function resetInputFields()
     {
         $this->salary_id = null;

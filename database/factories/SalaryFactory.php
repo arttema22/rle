@@ -23,6 +23,7 @@ class SalaryFactory extends Factory
             'driver_id' => User::all()->random(),
             'sum' => fake()->randomFloat(2, 10000, 50000),
             'comment' => fake()->words(3, true),
+            'profit_id' => fake()->randomDigit(),
         ];
     }
 }
