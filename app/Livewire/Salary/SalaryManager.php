@@ -61,7 +61,6 @@ class SalaryManager extends Component
      */
     public function create()
     {
-
         $this->resetInputFields();
         $this->event_date = date('Y-m-d');
         $this->createOrUpdate = 0;

@@ -26,10 +26,30 @@ class SalarySmallManager extends Component
     public function render()
     {
         $salaries = Salary::where('driver_id', Auth::user()->id)
-            ->with('driver')->orderByDesc('event_date')->simplePaginate(3, pageName: 'salaries');
+            ->where('profit_id', 0)
+            ->with('driver')
+            ->with('log')
+            ->orderByDesc('event_date')
+            ->paginate(10, pageName: 'salaries');
+
         return view('livewire.salary.salary-small-manager', ['salaries' => $salaries]);
     }
 
+    /**
+     * placeholder
+     *
+     * @return void
+     */
+    public function placeholder()
+    {
+        return view('livewire.salary.spinner');
+    }
+
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create()
     {
         $this->resetInputFields();
@@ -38,6 +58,12 @@ class SalarySmallManager extends Component
         $this->toggle();
     }
 
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function edit($id)
     {
         $this->createOrUpdate = 1;
@@ -51,6 +77,11 @@ class SalarySmallManager extends Component
         $this->toggle();
     }
 
+    /**
+     * store
+     *
+     * @return void
+     */
     public function store()
     {
         $this->validate([
@@ -74,6 +105,12 @@ class SalarySmallManager extends Component
         $this->dispatch('salaryUpdate');
     }
 
+    /**
+     * confirmDelete
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function confirmDelete($id)
     {
         $this->salary_id = $id;
@@ -92,11 +129,21 @@ class SalarySmallManager extends Component
         $this->dispatch('salaryUpdate');
     }
 
+    /**
+     * toggle
+     *
+     * @return void
+     */
     public function toggle()
     {
         $this->isOpenForm = !$this->isOpenForm;
     }
 
+    /**
+     * resetInputFields
+     *
+     * @return void
+     */
     private function resetInputFields()
     {
         $this->salary_id = null;

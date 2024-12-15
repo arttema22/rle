@@ -1,40 +1,25 @@
 <div class="relative mx-auto  bg-gray-100 overflow-hidden border sm:rounded-lg">
     <div class="flex justify-between px-6 py-4 bg-white">
-        {{__('Salaries')}}
-        <button wire:click="create" title="{{__('New salary')}}">New</button>
+        {{__('salaries.salaries')}}
+        <x-buttons.btn-new wire:click="create" />
     </div>
-    <div class="overflow-x-auto p-4">
-        <div class="w-full flex px-3 py-1">
-            <div class="w-1/3">{{__('Date')}}</div>
-            <div class="w-1/3">{{__('Sum')}}</div>
-            <div class="w-1/3">{{__('Comment')}}</div>
-        </div>
-        <div class="h-[190px] overflow-y-auto space-y-2">
-            @foreach ( $salaries as $salary )
-            <div x-data="{ open: false }" wire:key="{{ $salary->id }}"
-                class="bg-white shadow-[0_2px_4px_0px_rgba(0,0,0,0.15)] p-3 rounded-md" role="accordion">
-                <button @click="open=!open" type="button"
-                    class="w-full text-base text-left text-gray-800 flex items-center transition-all">
-                    <div class="w-1/3">{{$salary->event_date->format(config('app.date_format'))}}</div>
-                    <div class="w-1/3">{{$salary->sum}}</div>
-                    <div class="w-1/3">{{$salary->comment}}</div>
-                </button>
-                <div x-show="open" class="flex justify-between items-center rounded-md">
-                    <div class="mr-2 text-xs text-gray-600 leading-relaxed">
-                        {{__('Created')}} {{$salary->created_at}}
-                        {{__('Updated')}} {{$salary->updated_at}}
-                        {{__('Owner')}} {{$salary->owner}}
-                        {{__('Driver')}} {{$salary->driver->last_name}}
-                    </div>
-                    <div class="flex">
-                        <button wire:click="edit({{ $salary->id }})">edit</button>
-                        <button wire:click="confirmDelete({{ $salary->id }})">delete</button>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
+    <x-blocks.wrap>
+        @if ($salaries->isNotEmpty())
+        <x-blocks.header>
+            <x-slot:title>
+            </x-slot:title>
+            <div class="w-1/4">{{__('ui.date')}}</div>
+            <div class="w-1/4">{{__('ui.sum')}}</div>
+            <div class="w-1/4">{{__('ui.comment')}}</div>
+            <div class="w-1/4"></div>
+        </x-blocks.header>
+        <x-blocks.content class="h-[190px]">
+            @each('components.items.salary', $salaries, 'salary')
+        </x-blocks.content>
+        @else
+        <x-blocks.no-entries />
+        @endif
+    </x-blocks.wrap>
     <div class="px-4 py-4 bg-white">
         {{$salaries->links()}}
     </div>
