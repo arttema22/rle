@@ -12,7 +12,7 @@
         </div>
 
         <div class="md:col-span-2">
-            {{-- @livewire('Salary.SalarySmallManager') --}}
+            @livewire('Btrip.BtripSmallManager')
         </div>
         <div>
             @livewire('Btrip.BtripCard')

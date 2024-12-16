@@ -4,13 +4,13 @@ namespace App\Livewire\Btrip;
 
 use App\Models\BusinessTrip;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Livewire\Attributes\Lazy;
-use Livewire\WithoutUrlPagination;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 #[Lazy]
-class BtripManager extends Component
+class BtripSmallManager extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
@@ -30,18 +30,10 @@ class BtripManager extends Component
             ->with('driver')
             ->with('log')
             ->orderByDesc('event_date')
-            ->paginate(10, pageName: 'btrips');
+            ->paginate(3, pageName: 'btrips');
 
-        $archive = BusinessTrip::where('driver_id', Auth::user()->id)
-            ->where('profit_id', '!=', 0)
-            ->with('log')
-            ->orderByDesc('event_date')
-            ->paginate(10, pageName: 'archive');
-
-        return view('livewire.btrip.btrip-manager', [
-            'btrips' => $btrips,
-            'archive' => $archive
-        ]);
+        return view('livewire.btrip.btrip-small-manager', [
+            'btrips' => $btrips]);
     }
 
     /**
