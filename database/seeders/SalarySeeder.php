@@ -14,6 +14,6 @@ class SalarySeeder extends Seeder
     public function run(): void
     {
 
-        Salary::factory()->count(200)->create();
+        Salary::factory()->count(300)->create();
     }
 }

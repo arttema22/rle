@@ -13,7 +13,7 @@
             <div class="w-1/4"></div>
         </x-blocks.header>
         <x-blocks.content class="h-[190px]">
-            @each('components.items.salary', $btrips, 'btrip', 'components.items.empty')
+            @each('components.items.btrip', $btrips, 'btrip', 'components.items.empty')
         </x-blocks.content>
     </x-blocks.wrap>
     <div class="px-4 py-4 bg-white">

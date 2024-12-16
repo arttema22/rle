@@ -16,7 +16,7 @@
                 <div class="w-1/4"></div>
             </x-blocks.header>
             <x-blocks.content>
-                @each('components.items.salary', $btrips, 'btrip', 'components.items.empty')
+                @each('components.items.btrip', $btrips, 'btrip', 'components.items.empty')
                 {{$btrips->links()}}
             </x-blocks.content>
         </x-blocks.wrap>
@@ -33,7 +33,7 @@
                 <div class="w-1/4"></div>
             </x-blocks.header>
             <x-blocks.content>
-                @each('components.items.salary-archive', $archive, 'salary', 'components.items.empty')
+                @each('components.items.btrip-archive', $archive, 'btrip', 'components.items.empty')
                 {{$archive->links()}}
             </x-blocks.content>
         </x-blocks.wrap>

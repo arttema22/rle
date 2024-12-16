@@ -13,6 +13,6 @@ class BusinessTripSeeder extends Seeder
      */
     public function run(): void
     {
-    BusinessTrip::factory()->count(200)->create();
+    BusinessTrip::factory()->count(300)->create();
     }
 }
