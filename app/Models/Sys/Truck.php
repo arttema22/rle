@@ -2,6 +2,7 @@
 
 namespace App\Models\Sys;
 
+use App\Models\User;
 use App\Models\Main\Refilling;
 use App\Models\Dir\DirTruckType;
 use App\Models\Dir\DirTruckBrand;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Sys\MoonshineUser as SysMoonshineUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,7 +34,7 @@ class Truck extends Model
      */
     public function driver(): BelongsTo
     {
-        return $this->belongsTo(SysMoonshineUser::class, 'driver_id', 'id');
+        return $this->belongsTo(User::class, 'driver_id', 'id');
     }
 
     /**

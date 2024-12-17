@@ -1,6 +1,6 @@
 <div class="relative mx-auto  bg-gray-100 overflow-hidden border sm:rounded-lg">
     <div class="flex justify-between px-6 py-4 bg-white">
-        {{__('salaries.salaries')}}
+        {{__('refillings.refillings')}}
         <x-buttons.btn-new wire:click="create" />
     </div>
     <x-blocks.wrap>
@@ -8,16 +8,16 @@
             <x-slot:title>
             </x-slot:title>
             <div class="w-1/4">{{__('ui.date')}}</div>
+            <div class="w-1/4">{{__('ui.value')}}</div>
             <div class="w-1/4">{{__('ui.sum')}}</div>
-            <div class="w-1/4">{{__('ui.comment')}}</div>
             <div class="w-1/4"></div>
         </x-blocks.header>
         <x-blocks.content class="h-[190px]">
-            @each('components.items.salary', $salaries, 'salary', 'components.items.empty')
+            @each('components.items.refilling', $refillings, 'refilling', 'components.items.empty')
         </x-blocks.content>
     </x-blocks.wrap>
     <div class="px-4 py-4 bg-white">
-        {{$salaries->onEachSide(1)->links()}}
+        {{$refillings->onEachSide(1)->links()}}
     </div>
 
     <div wire:loading role="status" class="absolute -translate-x-1/2 -translate-y-1/2
@@ -30,7 +30,7 @@
         <span class="sr-only">Loading...</span>
     </div>
 
-    @include('components.salaries.form')
+    @include('components.refilling.form')
 
     @include('components.modal.confirming-deletion')
 

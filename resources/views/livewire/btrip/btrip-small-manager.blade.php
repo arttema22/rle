@@ -30,7 +30,7 @@
         <span class="sr-only">Loading...</span>
     </div>
 
-    @include('components.modal.salary-form')
+    @include('components.btrips.form')
 
     @include('components.modal.confirming-deletion')
 
