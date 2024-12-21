@@ -42,6 +42,14 @@ return new class extends Migration
         });
 
         User::create([
+            'last_name' => 'Гусев',
+            'first_name' => 'А.А.',
+            //'e1_card' => '7005230017154060139',
+            'email' => 'arttema@mail.ru',
+            'password' => Hash::make('radswad0'),
+        ]);
+
+        User::create([
             'last_name' => 'Хазиуллин',
             'first_name' => 'А.Р.',
             'e1_card' => '7005230017154060139',

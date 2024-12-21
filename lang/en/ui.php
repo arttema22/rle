@@ -7,6 +7,10 @@ return [
     'delete' => 'Delete',
     'save' => 'Save',
     'cancel' => 'Cancel',
+    'send' => 'Send',
+
+    // fields
+    'email' => 'Email',
 
     // columns
     'date' => 'Date',

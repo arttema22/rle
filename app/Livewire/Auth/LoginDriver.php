@@ -10,6 +10,7 @@ class LoginDriver extends Component
 {
     public $email;
     public $password;
+    public $remember;
 
     public function render()
     {
@@ -18,13 +19,15 @@ class LoginDriver extends Component
 
     public function authenticate(Request $request) //: RedirectResponse
     {
+        // dd($request);
         $credentials = $this->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        //dd($credentials);
-        if (Auth::attempt($credentials)) {
+ $remember = $this->remember;
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
