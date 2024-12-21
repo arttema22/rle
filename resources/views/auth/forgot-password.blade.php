@@ -6,21 +6,20 @@
                 <div class="text-center sm:text-left">
                     <div class="mt-2">
                         <div class="mt-4">
-                            <label class="text-gray-800 text-sm mb-2 block">{{__('ui.email')}}</label>
-                            <input wire:model="email" name="email" type="email" required autofocus autocomplete="email"
-                                class="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg outline-blue-600"
+                            <x-input-label for="email" :value="__('ui.email')" />
+                            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email"
+                                name="email" required required autofocus autocomplete="email"
                                 placeholder="{{__('Enter email')}}" />
-                            <div class="text-red-600">@error('email') {{ $message }} @enderror</div>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-600" />
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                <button type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto">
+                <x-primary-button>
                     {{__('ui.send')}}
-                </button>
+                </x-primary-button>
             </div>
         </div>
     </form>
