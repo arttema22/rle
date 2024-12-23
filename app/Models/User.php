@@ -3,9 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordEmailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -49,4 +50,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+    * Отправить пользователю уведомление о сбросе пароля.
+    *
+    * @param  string  $token
+    */
+    public function sendPasswordResetNotification($token): void
+    {
+        $url = env('APP_URL'). '/reset-password/'.$token;
+        $this->notify(new ResetPasswordEmailNotification($url));
+    }
+
 }
