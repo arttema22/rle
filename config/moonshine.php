@@ -90,8 +90,9 @@ return [
     ],
 
     // Localizations
-    'locale' => 'en',
+    'locale' => 'ru',
     'locales' => [
-        // en
+        'ru',
+        'en'
     ],
 ];
