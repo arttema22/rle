@@ -11,12 +11,14 @@ class ResetPasswordEmailNotification extends Notification
 {
     use Queueable;
 
+    protected $url;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($url)
     {
-        $url = '222';
+       $this->url = $url;
     }
 
     /**
@@ -34,12 +36,14 @@ class ResetPasswordEmailNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-
-        dd($this->$url);
         return (new MailMessage)
-                    ->line('111 The introduction to the notification.')
-                    ->action('222 Notification Action', $this->$url)
-                    ->line('333 Thank you for using our application!');
+        ->subject(__('mail.reset_password'))
+        ->greeting(__('mail.hello'). ' ' .$notifiable->last_name.' '.$notifiable->first_name)
+        ->cc('9268188@gmail.com')
+        ->line(__('mail.you_have_sent_request_change_password'))
+        ->line(__('mail.to_change_password_click_button'))
+        ->action(__('mail.сhange_password'), $this->url)
+        ->line(__('mail.if_wasnt_you_dont_need_do_anything'));
     }
 
     /**

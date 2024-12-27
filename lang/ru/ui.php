@@ -11,6 +11,9 @@ return [
 
     // fields
     'email' => 'Электронная почта',
+    'enter_email' => 'Введите адрес почты',
+    'password' => 'Пароль',
+    'enter_password' => 'Введите пароль',
 
     // columns
     'date' => 'Дата',

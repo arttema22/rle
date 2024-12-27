@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'login' => 'Login',
-    'forgot_password' => 'Forgot password',
+    'login' => 'Войти',
+    'forgot_password' => 'Забыли пароль',
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',

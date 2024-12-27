@@ -12,6 +12,11 @@ class LoginDriver extends Component
     public $password;
     public $remember;
 
+    /**
+     * render
+     *
+     * @return void
+     */
     public function render()
     {
         return view('livewire.auth.login-driver');
@@ -19,13 +24,12 @@ class LoginDriver extends Component
 
     public function authenticate(Request $request) //: RedirectResponse
     {
-        // dd($request);
         $credentials = $this->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
- $remember = $this->remember;
+        $remember = $this->remember;
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
@@ -36,5 +40,4 @@ class LoginDriver extends Component
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-
 }

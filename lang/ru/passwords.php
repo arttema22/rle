@@ -1,22 +1,10 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are the default lines which match reasons
-    | that are given by the password broker for a password update attempt
-    | outcome such as failure due to an invalid password / reset token.
-    |
-    */
-
-    'reset' => 'Your password has been reset.',
-    'sent' => 'We have emailed your password reset link.',
+    'reset' => 'Ваш пароль был изменен.',
+    'sent' => 'Мы отправили Вам ссылку на восстановление пароля.
+     Зайдите в свою электронную почту и следуйте инструкции в письме.',
     'throttled' => 'Немного подождите перед повторной отправкой.',
     'token' => 'Неверный токен восстановления пароля.',
     'user' => "Мы не нашли пользователя с таким адресом.",
-
 ];

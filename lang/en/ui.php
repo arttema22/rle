@@ -11,6 +11,9 @@ return [
 
     // fields
     'email' => 'Email',
+    'enter_email' => 'Enter email',
+    'password' => 'Password',
+    'enter_password' => 'Enter password',
 
     // columns
     'date' => 'Date',
