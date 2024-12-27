@@ -45,8 +45,9 @@
         </div>
 
         <div class='flex max-lg:ml-auto space-x-4'>
-            @livewire('Auth.AuthDriver')
-
+            <x-second-link href="{{ route('login') }}">
+                {{__('auth.login')}}
+            </x-second-link>
             <button id="toggleOpen" class='lg:hidden'>
                 <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
