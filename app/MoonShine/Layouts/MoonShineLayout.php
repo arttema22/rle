@@ -34,6 +34,7 @@ use MoonShine\UI\Components\{
 };
 use App\MoonShine\Resources\SalaryResource;
 use MoonShine\MenuManager\MenuItem;
+use App\MoonShine\Resources\DriverResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -49,6 +50,7 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuItem::make('Salaries', SalaryResource::class),
+            MenuItem::make('Drivers', DriverResource::class),
         ];
     }
 

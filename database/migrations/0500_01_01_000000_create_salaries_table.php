@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('driver_id')->references('id')->on('users');
             $table->float('sum', 9, 2);
             $table->string('comment')->nullable();
-            $table->BigInteger('profit_id')->unsigned()->default(0);
+            $table->BigInteger('profit_id')->unsigned()->nullable()->default(null);
             $table->timestamps();
         });
     }

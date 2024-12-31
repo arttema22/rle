@@ -2,18 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Pages\Salary;
+namespace App\MoonShine\Pages\Driver;
 
 use Throwable;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Laravel\Pages\Crud\DetailPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Number;
 
-class SalaryDetailPage extends DetailPage
+class DriverIndexPage extends IndexPage
 {
     /**
      * @return list<ComponentContract|FieldContract>
@@ -21,14 +18,9 @@ class SalaryDetailPage extends DetailPage
     protected function fields(): iterable
     {
         return [
-            ID::make('id'),
-            Date::make(__('ui.date'), 'event_date')->format('d.m.Y'),
-            Number::make(__('ui.sum'), 'sum')->badge('primary'),
-            Text::make(__('ui.comment'), 'comment'),
-            Text::make(__('ui.driver'), 'driver.full_name'),
-            Text::make(__('ui.owner'), 'owner'),
-            Date::make(__('ui.created'), 'created_at')->format('d.m.Y H:i'),
-            Date::make(__('ui.updated'), 'updated_at')->format('d.m.Y H:i'),
+            Text::make(__('ui.fullname'), 'fullname'),
+            Text::make(__('ui.driver'), 'e1_card'),
+            Text::make(__('ui.owner'), 'email'),
         ];
     }
 

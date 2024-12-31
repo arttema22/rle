@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Notifications\ResetPasswordEmailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,7 +26,7 @@ class User extends Authenticatable
         'e1_card',
         'email',
         'password',
-         'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -51,16 +52,20 @@ class User extends Authenticatable
         ];
     }
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->last_name} {$this->first_name} {$this->middle_name}";
+    }
+
     /**
-    * Отправить пользователю уведомление о сбросе пароля.
-    *
-    * @param  string  $token
-    */
+     * Отправить пользователю уведомление о сбросе пароля.
+     *
+     * @param  string  $token
+     */
     public function sendPasswordResetNotification($token): void
     {
-        $url = env('APP_URL').'/reset-password/'.$token;
+        $url = env('APP_URL') . '/reset-password/' . $token;
         //$url = 'test';
         $this->notify(new ResetPasswordEmailNotification($url));
     }
-
 }

@@ -26,7 +26,7 @@ class SalarySmallManager extends Component
     public function render()
     {
         $salaries = Salary::where('driver_id', Auth::user()->id)
-            ->where('profit_id', 0)
+            ->whereNull('profit_id')
             ->with('driver')
             ->with('log')
             ->orderByDesc('event_date')

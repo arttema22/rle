@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages\Salary;
 
+use Throwable;
+use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Date;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Number;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\UI\Components\ActionButton;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Contracts\UI\FieldContract;
-use Throwable;
 
 class SalaryFormPage extends FormPage
 {
@@ -16,7 +21,11 @@ class SalaryFormPage extends FormPage
      */
     protected function fields(): iterable
     {
-        return [];
+        return [
+            Date::make(__('ui.date'), 'event_date')->format('d.m.Y'),
+            Number::make(__('ui.sum'), 'sum')->badge('primary'),
+            Text::make(__('ui.comment'), 'comment'),
+        ];
     }
 
     /**

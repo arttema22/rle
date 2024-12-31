@@ -18,6 +18,7 @@ return [
     // columns
     'date' => 'Date',
     'enter_date' => 'Enter date',
+    'driver' => 'Driver',
     'sum' => 'Sum',
     'count' => 'Count',
     'enter_sum' => 'Enter sum',

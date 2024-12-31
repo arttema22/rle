@@ -30,7 +30,7 @@
         <span class="sr-only">Loading...</span>
     </div>
 
-    @include('components.refilling.form')
+    {{-- @include('components.refilling.form') --}}
 
     @include('components.modal.confirming-deletion')
 

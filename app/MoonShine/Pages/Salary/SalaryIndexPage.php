@@ -20,11 +20,10 @@ class SalaryIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            Date::make('event_date')->format('d.m.Y'),
-            Text::make('owner'),
-            Text::make('driver.last_name'),
-            Number::make('sum'),
-            Text::make('comment'),
+            Date::make(__('ui.date'), 'event_date')->format('d.m.Y')->sortable(),
+            Text::make(__('ui.driver'), 'driver.fullname'),
+            Number::make(__('ui.sum'), 'sum')->badge('primary'),
+            Text::make(__('ui.comment'), 'comment'),
         ];
     }
 
